@@ -16,14 +16,14 @@
 // element with ID "warmUpDate".
 
 // STEP 1: Create a new Date object using: let now = new Date();
-
+let now = new Date("warmUpDate);
 // STEP 2: Use .getDay() to get the day of the week as a number.
 //         Sunday = 0, Monday = 1, Tuesday = 2, ... Saturday = 6
-
+.getDay(now)
 // STEP 3: Create an array of day names:
 //         let days = ["Sunday", "Monday", "Tuesday", "Wednesday",
 //                     "Thursday", "Friday", "Saturday"];
-
+let days = ["Sunday", "Friday", "Saturday"]
 // STEP 4: Use the day number as an index to get the day name
 //         from the array.
 
