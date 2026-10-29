@@ -16,19 +16,20 @@
 // element with ID "warmUpDate".
 
 // STEP 1: Create a new Date object using: let now = new Date();
-let now = new Date("warmUpDate);
+let now = new Date();
 // STEP 2: Use .getDay() to get the day of the week as a number.
 //         Sunday = 0, Monday = 1, Tuesday = 2, ... Saturday = 6
-.getDay(now)
+let dayNumber = now.getDay();
 // STEP 3: Create an array of day names:
 //         let days = ["Sunday", "Monday", "Tuesday", "Wednesday",
 //                     "Thursday", "Friday", "Saturday"];
-let days = ["Sunday", "Friday", "Saturday"]
+let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 // STEP 4: Use the day number as an index to get the day name
 //         from the array.
-
+let dayName = days[dayNumber];
 // STEP 5: Display the day name in the element with ID "warmUpDate"
 //         using document.getElementById("warmUpDate").innerHTML
+document.getElementById("warmUpDate").innerHTML = dayName;
 
 
 // ============================================
@@ -43,13 +44,15 @@ let days = ["Sunday", "Friday", "Saturday"]
 // STEP 7: Get the month using .getMonth()
 //         IMPORTANT: .getMonth() returns 0–11 (January = 0)
 //         so you must add 1 to get the correct month number.
-
+let month = now.getMonth() + 1;
 // STEP 8: Get the day of the month using .getDate()
-
+let date = now.getDate();
 // STEP 9: Get the year using .getFullYear()
-
+let year = now.getFullYear();
 // STEP 10: Build the date string: month + "/" + day + "/" + year
 //          Display it in the element with ID "myDate"
+let dateString = month + "/" + date + "/" + year;
+document.getElementById("myDate").innerHTML = dateString;
 
 
 // ============================================
@@ -61,7 +64,7 @@ let days = ["Sunday", "Friday", "Saturday"]
 
 // STEP 11: Record the start time using new Date().getTime()
 //          This gives you the current time in milliseconds.
-
+let startTime = new Date().getTime();
 // STEP 12: Create a variable to hold the timer ID (for stopping later).
 //          Use setInterval() with a delay of 10 milliseconds.
 //          Inside the interval function:
@@ -69,6 +72,17 @@ let days = ["Sunday", "Friday", "Saturday"]
 //          b) Calculate elapsed seconds: (currentTime - startTime) / 1000
 //          c) Display the elapsed time using .toFixed(3)
 //             in the element with ID "myTimer"
+let timerId;
+
+function startTimer() {
+  timerId = setInterval(function() {
+    let currentTime = new Date().getTime();
+    let elapsedSeconds = (currentTime - startTime) / 1000;
+    document.getElementById("myTimer").innerHTML = elapsedSeconds.toFixed(3);
+  }, 10);
+}
+
+startTimer();
 
 
 // ============================================
@@ -83,7 +97,7 @@ let days = ["Sunday", "Friday", "Saturday"]
 
 // STEP 13: Create a variable to track whether the timer is
 //          currently running (let running = true;)
-
+let running = true;
 // STEP 14: Add a click event listener to the button (ID "myBtn").
 //          Inside the listener:
 //          a) If running is true:
@@ -95,3 +109,15 @@ let days = ["Sunday", "Friday", "Saturday"]
 //             - Start a new setInterval (same as STEP 12)
 //             - Change button innerHTML to "Stop"
 //             - Set running to true
+document.getElementById("myBtn").addEventListener("click", function() {
+  if (running) {
+    clearInterval(timerId);
+    this.innerHTML = "Start";
+    running = false;
+  } else {
+    startTime = new Date().getTime();
+    startTimer();
+    this.innerHTML = "Stop";
+    running = true;
+  }
+});
